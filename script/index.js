@@ -3,7 +3,11 @@ let total = 0;
 cart = JSON.parse(localStorage.getItem("cart"));
 
 fetch("https://striveschool-api.herokuapp.com/books/")
-  .then((resultsObj) => resultsObj.json())
+  .then((resultsObj) => {
+    if (resultsObj.ok) {
+      return resultsObj.json();
+    }
+  })
   .then((bookObj) => {
     const container = document.querySelector("#listOfBooks");
     bookObj.forEach((book) => {
